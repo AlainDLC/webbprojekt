@@ -1,0 +1,40 @@
+{
+  "questions": [
+    { "question": "Vart ligger Golden Gate Bron?",
+      "answer1": "San Fransico",
+      "answer2": "Stockholm",
+      "answer3": "Madrid",
+      "correct": "answer1"
+    },
+
+    { "question": "Vem är människans bästa vän?",
+      "answer1":"Katt",
+      "answer2": "Hund",
+      "answer3":"Fågel",
+      "correct": "answer2"
+    },
+    {
+      "question": "Vad heter Sveriges tredje största ö?",
+      "answer1": "Öland",
+      "answer2": "Hisingen",
+      "answer3": "Orust",
+      "correct": "answer3"
+    },
+    {
+      "question": "Vad är 1 + 1?",
+      "answer1": "3",
+      "answer2": "4",
+      "answer3": "2",
+      "correct": "answer3"
+    },
+    {
+      "question": "Vad är 8/10?",
+      "answer1": "0,1",
+      "answer2": "1",
+      "answer3": "2",
+      "correct": "answer1"
+    }
+  ]
+
+}
+
