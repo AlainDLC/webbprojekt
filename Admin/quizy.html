@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Newton självrättande fråger</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+        input[type=button] {
+            font-size: 15px;
+            padding: 5px;
+            letter-spacing: .9px;
+        }
+        #prev {
+            background-color: #61A9E1;
+            width: 181px;
+        }
+        #next {
+            background-color: #61A9E1;
+            width: 181px;
+            /*margin-left: -4px;*/
+        }
+        #fin {
+            background-color: #BE726E;
+            width: 362px;
+
+        }
+        .grid.container {
+            width: 1000px;
+            margin: 0px auto;
+
+
+        }
+
+
+        body{
+            background: url(http://www.newton.se/shared/2015/01/Newton_bw-0410-p19b7cmvjd1fn444k12ae1b9dfql-e1420809104674.jpg)no-repeat center center fixed;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            -webkit-background-size: cover;
+            background-size: cover;
+            text-align: center;
+
+        }
+        #main{
+            width: 1000px;
+            height: 600px;
+            background: #FFE6D8;
+            margin: 80px 100px;
+        }
+        .clear{
+            clear: both;
+        }
+        .logo{
+            float: left;
+        }
+        ul li {
+            float: left;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+
+        li {
+            float: left;
+
+        }
+
+        li a, .dropbtn {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            float: left;
+
+        }
+
+        li a:hover, .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        li.dropdown {
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            min-width: 160px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<h1 id="question"></h1>
+<form name="quiz">
+    <div>
+        <input type="radio" name="choice" id="a1" value="0"><span id="choice0"></span>
+    </div>
+    <div>
+        <input type="radio" name="choice" id="a2" value="1"><span id="choice1"></span>
+    </div>
+    <div>
+        <input type="radio" name="choice" id="a3" value="2"><span id="choice2"></span>
+    </div>
+    <div>
+        <input type="radio" name="choice" id="a4" value="3"><span id="choice3"></span>
+    </div>
+    <br>
+    <input type="button" id="prev" name="nästa" value="Föregåande"><input type="button" id="next" name="next" value="Nästa fråga">
+    <br>
+    <input type="button" id="fin" name="fin" value="Färdigt se reultat">
+</form>
+<div id="score" class="hidden"></div>
+<script>
+    var answers = [];
+    var currentQuestion = 0;
+
+    //lopp för kolla om någon radiobuttun är ner tryckt.
+    for (var i = 0; i < document.quiz.choice.length; i++)
+    {
+        if ( document.quiz.choice[i].checked ) {
+            document.quiz.choice[i].checked = "";
+        }
+    }
+
+    //starta json
+    var request = new XMLHttpRequest();
+    request.open("GET", "../data/prov.json", false);
+    request.send(null);
+    request = JSON.parse(request.responseText);
+    var qArr = request[currentQuestion].choices;
+    var qQue = request[currentQuestion].question;
+    var ansSpans = document.querySelectorAll("span");
+    document.getElementById("question").innerHTML = qQue;
+    for (var i = 0; i < ansSpans.length; i ++) {
+        ansSpans[i].innerHTML = qArr[i];
+    }
+
+
+
+
+
+    //hämta checkad val
+    function getChecked() {
+        var choices = document.quiz.choice;
+        for (var i = 0; i < choices.length; i++) {
+            if (choices[i].checked) {
+                return choices[i].value;
+            }
+        }
+        return undefined;
+    }
+
+    //skapa en handler
+    function nextHandler() {
+        //kolla om knappen är vald
+        var selectedChoice = getChecked();
+        if ( isNaN(selectedChoice) ) {
+            return;
+        }
+        //spara svaret
+        //svar[currentQuestion] = selectedChoice;
+        //andvänder en loop för kontrolera att inte man överstiger frågerna
+        if (currentQuestion == request.length - 1) {
+            return;
+        }
+        //kollar om det finns fler fråger
+        currentQuestion++;
+        qArr = request[currentQuestion].choices;
+        qQue = request[currentQuestion].question;
+        //sätt frågerna
+        var ansSpans = document.querySelectorAll("span");
+        //sätt valen
+        document.getElementById("question").innerHTML = qQue;
+
+        for (var i = 0; i < document.quiz.choice.length; i++) {
+            if (document.quiz.choice[i].checked) {
+                document.quiz.choice[i].checked = "";
+            }
+        }
+
+        for (var i = 0; i < ansSpans.length; i++) {
+            ansSpans[i].innerHTML = qArr[i];
+            if (i == answers[currentQuestion]) {
+                document.quiz.choice[i].checked = "checked";
+            }
+        }
+    }
+
+    function prevHandler() {
+        if (currentQuestion == 0) {
+            return;
+        } else {
+            var selectedChoice = getChecked();
+            //om användaren tidigare kontrollerat ett svar , och kontrollera sedan ett annat svar , sparar det senaste svaret
+            if (selectedChoice) {
+                answers[currentQuestion] = selectedChoice;
+            }
+            currentQuestion -= 1;
+        }
+        qArr = request[currentQuestion].choices;
+        qQue = request[currentQuestion].question;
+        document.getElementById("question").innerHTML = qQue;
+        var ansSpans = document.querySelectorAll("span");
+        for (var i = 0; i < ansSpans.length; i++) {
+            ansSpans[i].innerHTML = qArr[i];
+            if (i == answers[currentQuestion]) {
+                document.quiz.choice[i].checked = "checked";
+            }
+        }
+    }
+
+    function finHandler() {
+        if (answers.length != 4) {
+            return;
+        }
+
+        var score = 0;
+        for (var i = 0; i < request.length; i++) {
+            if (request[i].answer == parseInt(answers[i], 10)) {
+                score++;
+            }
+        }
+        document.getElementById("question").innerHTML = "Ditt Resultat";
+        document.quiz.className = "hidden";
+        document.getElementById("score").className = "";
+        document.getElementById("score").innerHTML = "" + score + " poäng av 4";
+    }
+
+    function radioHandler(e) {
+        var el = e.target;
+        var type = e.type;
+        //valedering
+        for (var i = 0; i < document.quiz.choice.length; i++) {
+            //console.log(document.quiz.choice[i]);
+            if (el == document.quiz.choice[i]) {
+                console.log("lawl");
+                answers[currentQuestion] = el.value;
+            }
+        }
+    }
+    document.quiz.addEventListener("click", radioHandler);
+    document.quiz.next.addEventListener("click", nextHandler);
+    document.quiz.prev.addEventListener("click", prevHandler);
+    document.quiz.fin.addEventListener("click", finHandler);
+
+</script>
+</body>
+</html>
