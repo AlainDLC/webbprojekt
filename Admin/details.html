@@ -1,0 +1,28 @@
+<section>
+  <article>
+    <h1>{{exams[index].name}}</h1>
+    <dl>
+      <dt>Subject</dt>
+      <dd>{{exams[index].subject}}</dd>
+      <dt>Class</dt>
+      <dd>{{exams[index].class}}</dd>
+      <dt>Start Time</dt>
+      <dd>{{exams[index].startTime}}</dd>
+      <dt>End Time</dt>
+      <dd>{{exams[index].endTime}}</dd>
+    </dl>
+  </article>
+</section>
+
+<section class="questions">
+  <form ng-submit="submit()">
+    <p ng-if="flash" class="flash flash-{{flash.state}}">{{flash.message}}</p>
+
+    <ul>
+      <li ng-repeat="item in [] | range:exams[index].questionCount">
+        apa
+      </li>
+    </ul>
+    <button type="submit">Submit</button>
+  </form>
+</section>
