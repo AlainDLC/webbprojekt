@@ -1,0 +1,35 @@
+{
+  "users": [
+    { "username": "Kalle Johansson",
+      "userpassword": "kalle123",
+      "usertype": "admin"
+    },
+
+    { "username": "Adam Berg",
+      "userpassword":"adam123",
+      "usertype": "student"
+
+
+    },
+    { "username": "Camilla Wall",
+      "userpassword":"camilla123",
+      "usertype": "student"
+
+
+    },
+    { "username": "Stina Pettersson",
+      "userpassword":"stina123",
+      "usertype": "student"
+
+
+    },
+    { "username": "Oscar King",
+      "userpassword":"oscar123",
+      "usertype": "admin"
+
+
+    }
+  ]
+
+}
+

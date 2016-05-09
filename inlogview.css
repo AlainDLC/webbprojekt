@@ -1,0 +1,22 @@
+h2{
+    color: #f47920;
+text-align: center;}
+ul li{
+ float: right;
+    padding: 20px;}
+
+
+fieldset{
+    width:350px;
+    border: 1px solid;
+    border-radius:10px;
+    padding: 20px;
+    text-align: right;}
+
+legend{
+    background-color: #efefef;
+    border:5px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-align: left;
+    text-transform: uppercase; }
