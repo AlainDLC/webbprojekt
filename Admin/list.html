@@ -1,0 +1,53 @@
+<section class="new">
+  <form ng-submit="submit()">
+    <p ng-if="flash" class="flash flash-{{flash.state}}">{{flash.message}}</p>
+
+    <label class="formgroup">
+      Name
+      <input type="text" ng-model="exam.name" name="name" required>
+    </label>
+    <label class="formgroup">
+      Subject
+      <input type="text" ng-model="exam.subject" name="subject" required>
+    </label>
+    <label class="formgroup">
+      Class
+      <input type="text" ng-model="exam.class" name="class" required>
+    </label>
+    <label class="formgroup">
+      Number of questions
+      <input type="number" ng-model="exam.questionCount" name="questionCount" min="1" required>
+    </label>
+    <label class="formgroup">
+      Start Time
+      <input type="datetime-local" ng-model="exam.startTime" name="startTime" required>
+    </label>
+    <label class="formgroup">
+      End Time
+      <input type="datetime-local" ng-model="exam.endTime" name="endTime" required>
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+</section>
+
+<section class="records">
+  <p ng-if="exams.length == 0">There are no exams yet.</p>
+  <table ng-if="exams.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Class</th>
+        <th>Questions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in exams | orderBy: ['name']">
+        <td><a href="#/exams/{{exams.indexOf(item)}}">{{item.name}}</a></td>
+        <td>{{item.subject}}</td>
+        <td>{{item.class}}</td>
+        <td>{{item.questionCount}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
