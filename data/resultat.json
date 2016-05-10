@@ -1,0 +1,16 @@
+{
+  "resultat": [
+    { "namn": "Maral",
+      "klass": "Java1",
+      "betyg": "G"
+    },
+    { "namn": "John",
+      "klass": "Java1",
+      "betyg": "VG"
+    },
+    { "namn": "Edvin",
+      "klass": ".Net",
+      "betyg": "IG"
+    }
+  ]
+}
