@@ -1,16 +1,34 @@
 {
   "resultat": [
-    { "namn": "Maral",
+    { "namn": "Alex Ekborg",
       "klass": "Java1",
       "betyg": "G"
     },
-    { "namn": "John",
+    { "namn": "John larsson",
       "klass": "Java1",
       "betyg": "VG"
     },
-    { "namn": "Edvin",
+    { "namn": "Edvin Björkström",
+      "klass": ".Net",
+      "betyg": "G"
+    },
+    { "namn": "Sara Afsar",
       "klass": ".Net",
       "betyg": "IG"
+    },
+    { "namn": "Sean Vasei",
+      "klass": "Webbdesign",
+      "betyg": "G"
+    },
+    { "namn": "Maral Naseri",
+      "klass": ".Net",
+      "betyg": "VG"
+    },
+    { "namn": "Mona Hanson",
+      "klass": "Java1",
+      "betyg": "IG"
     }
+
   ]
 }
+
