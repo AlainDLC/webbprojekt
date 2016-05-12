@@ -1,4 +1,5 @@
 
+
 var xhr = new XMLHttpRequest();                 // Create XMLHttpRequest object
 
 xhr.onload = function() {                       // When readystate changes
@@ -8,17 +9,25 @@ xhr.onload = function() {                       // When readystate changes
 
     // BUILD UP STRING WITH NEW CONTENT (could also use DOM manipulation)
     var newContent = '<table>';
-    newContent += '<th>Namm</th><th>Klass</th><th>Betyg</th><th>Feedback</th>';
+    newContent += '<th>Namm</th><th>Klass</th><th>Betyg</th>';
     for (var i = 0; i < responseObject.resultat.length; i++) { // Loop through object
         newContent += '<tr>';
         newContent += '<td>' + responseObject.resultat[i].namn + '</td>';
-        newContent += '<td>' +responseObject.resultat[i].klass + '</td>';
-        newContent += '<td>' +responseObject.resultat[i].betyg + '</td>';
+        newContent += '<td>' + responseObject.resultat[i].klass + '</td>';
+        newContent += '<td>' + responseObject.resultat[i].betyg + '</td>';
         newContent += '</tr>';
     }
     newContent += '</table>';
 
+    var newContent_json = JSON.stringify(newContent);
+    localStorage.setItem('newContent',newContent_json);
 
+
+    function get_dat_newContent() {
+        newContent_json = localStorage.getItem('newContent');
+        var newContent = JSON.parse(newContent_json);
+
+    }
     // Update the page with the new content
     document.getElementById('content').innerHTML = newContent;
 
