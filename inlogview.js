@@ -3,8 +3,6 @@
  */
 var xhr = new XMLHttpRequest();
 
-
-
 xhr.onload = function() {
     if (xhr.status === 200) {
         responseObject = JSON.parse(xhr.responseText);
@@ -54,14 +52,15 @@ xhr.onload = function() {
                     }
                     document.getElementById('content').innerHTML = newContent;
 
-                    // }
-
                 }
-                xhr.open('GET', '../data/inlog.json', true); // Prepare the request
-                xhr.send(null);
+
             }
-        }
+            xhr.open('GET', '../data/inlog.json', true); // Prepare the request
+            xhr.send(null);}
     }
+};
+
+
 
 
 
